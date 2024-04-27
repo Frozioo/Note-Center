@@ -1,0 +1,564 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  justify-content: center;
+  background-color: #1b375e;
+}
+
+.error {
+  width: auto;
+  height: 20px;
+}
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #264e86;
+  margin: 0;
+  padding: 0;
+}
+
+.signup-button {
+  padding: 10px 20px;
+  margin: 10px;
+  margin-left: 23px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-button2 {
+  padding: 10px 20px;
+  margin: 10px;
+  margin-left: 23px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.submit-button {
+  padding: 10px 20px;
+  margin: 10px;
+  margin-left: 23px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+.login-button {
+  padding: 10px 24px;
+  margin: 10px;
+  margin-left: 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.email-input,
+.password-input {
+  margin: 5px;
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 40px;
+  background-color: gainsboro;
+}
+
+.footer {
+  background-color: #1b375e;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Start of Class Home Page CSS */
+
+.class-body {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* background-color: #264e86; */
+  /* margin: 0; */
+  /* padding: 0; */
+  min-height: 100vh;
+}
+
+.classPageGreeting {
+  font-size: 60px;
+  font-family: Arial;
+  text-align: center;
+}
+
+.classPageStyle {
+  background-color: white;
+  position: flex;
+  justify-content: center;
+  background-size: 100%;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+
+.classSelectButton {
+  width: 200px;
+  height: 150px;
+  border-radius: 5%;
+  background-color: gainsboro;
+  font-size: 25px;
+  font-family: Arial;
+  text-decoration: none;
+  color: inherit;
+}
+
+.grid-container {
+  display: grid;
+  gap: 60px;
+  grid-template-columns: repeat(4, 0fr);
+  justify-content: center;
+}
+
+.classNameStuff {
+  font-size: 14px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.classIDStuff {
+  font-size: 20px;
+}
+
+nav {
+  background-color: #1b375e;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav li {
+  height: 50px;
+}
+
+nav li:first-child {
+  margin-right: auto;
+}
+
+nav a {
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+nav a:hover {
+  background-color: #152d4e;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  z-index: 999;
+  background-color: #1b375e;
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.sidebar a {
+  width: 100%;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .hideWhenSmall {
+    display: none;
+  }
+  .menu-button {
+    display: block;
+  }
+}
+@media (max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+.createButton {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 150px;
+  height: 34px;
+  background-color: Gainsboro;
+  font-size: 15px;
+  font-family: Arial;
+}
+
+.classCreation {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.class-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 10%;
+}
+
+.joinClasses {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.join-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 10%;
+}
+
+/* .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+} */
+
+.teacherName {
+  font-size: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.notInClass {
+  font-size: 50px;
+  text-align: center;
+}
+
+/* End of Class Home Page CSS */
+
+/* Start of Notes Page CSS */
+
+.notesPageGreeting {
+  font-size: 30px;
+  font-family: Arial;
+  text-align: center;
+}
+
+.notesPageStyle {
+  background-color: white;
+  position: flex;
+  justify-content: center;
+  background-size: 100%;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+
+/* End of Notes Page CSS */
+
+.adminUserListStyle {
+  background-color: white;
+  position: flex;
+  justify-content: center;
+  background-size: 100%;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+
+/* Start of Admin User List Page */
+
+.tableHeaders {
+  margin-top: 0%;
+  font-size: 40px;
+  text-align: center;
+  position: flex;
+}
+
+.tableAlignments {
+  left: 0%;
+  position: flex;
+  top: 14%;
+  align-content: center;
+}
+
+/* Update Color Scheme For Table Later */
+.tableFonts {
+  font-size: 17px;
+  border-color: black;
+  background-color: WhiteSmoke;
+  /* margin-right: auto; */
+}
+
+.buttonFonts {
+  font-size: 17px;
+  border-color: black;
+  background-color: gainsboro;
+}
+
+/* End of Admin User List Page */
+
+/* Start of Class Page  */
+
+.classHeader {
+  font-size: 45px;
+  font-family: Arial;
+  text-align: center;
+  position: flex;
+}
+
+.classInfoOne {
+  font-size: 15px;
+  font-family: Arial;
+  text-align: center;
+  position: absolute;
+  top: 80px;
+  left: 0;
+}
+
+.classInfoTwo {
+  font-size: 15px;
+  font-family: Arial;
+  text-align: center;
+  position: absolute;
+  top: 65px;
+  left: 0;
+}
+
+.classInfoThree {
+  font-size: 15px;
+  font-family: Arial;
+  text-align: center;
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+
+.showNotesButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1b375e;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-top: -2px;
+}
+.showNotesButton:hover {
+  background-color: #152d4e;
+}
+
+.deleteClassButton {
+  display: inline-block;
+  padding: 10px 20px;
+  width: 150px;
+  height: 50px;
+  right: 0px;
+  top: 49px;
+  background-color: #1b375e;
+  font-size: 20px;
+  /* font-family: Arial; */
+  border: none;
+  text-decoration: none;
+  color: #fff;
+  position: absolute;
+}
+.deleteClassButton:hover {
+  background-color: #152d4e;
+}
+
+.browseButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1b375e;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.browseButton:hover {
+  background-color: #152d4e;
+}
+
+.uploadButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1b375e;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 1px;
+}
+
+.uploadButton:hover {
+  background-color: #152d4e;
+}
+
+.selectFileButton {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.deleteButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1b375e;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.deleteButton:hover {
+  background-color: #152d4e;
+}
+
+.uploadedBy {
+  position: relative;
+  left: 0px;
+  top: 5px;
+  font-size: 20px;
+}
+
+.uploadedDate {
+  position: relative;
+  left: 20%;
+  top: 5px;
+  font-size: 20px;
+}
+
+/* End of Class Page */
+
+/* ContactForm Page */
+
+.table-container {
+  display: flex;
+}
+
+.contactTable {
+  width: 95%;
+}
+
+.delete-buttons {
+  width: 5%;
+  margin-left: 10px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.delete-button-row {
+  margin-top: 20px;
+}
+
+.deleteForm {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1b375e;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.deleteForm:hover {
+  background-color: #152d4e;
+}
+
+/* End of ContactForm Page */
