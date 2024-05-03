@@ -1,14 +1,12 @@
 <?php
-
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
     require '/home/group9/connections/connect.php';
-
+    //If user did not log in properly kick them to login page
     session_start();
     if(!isset($_SESSION['email'])) {
         header('Location: index.php');
         exit;
     }
+    //Checking if the user is an admin
     $adminCheck = "select * from Admin where AdminUserName = :email";
     $stmtAdmin = $conn->prepare($adminCheck);
     $stmtAdmin->bindParam(':email', $_SESSION['email']);
@@ -17,7 +15,7 @@
     if ($stmtAdmin->rowCount() > 0) {
         $is_admin = true;
     }
-
+    //Checking if the user is a teacher
     $teacherCheck = "select * from Teacher where TeacherUserName = :email";
     $stmtTeacher = $conn->prepare($teacherCheck);
     $stmtTeacher->bindParam(':email', $_SESSION['email']);
@@ -27,6 +25,8 @@
         $is_teacher = true;
     }
 ?>
+
+<!-- Standard HTML -->
 
 <!DOCTYPE hmtl>
 
@@ -41,7 +41,6 @@
 
 <div id="classCreation" class="classCreation">
     <div class="class-content">
-        <!-- <span class="close">&times;</span> -->
         <form action="createClass.php" method="post">
                 <label for="classID">Class ID</label><br>
                 <input type="text" id="classID" name="classID" placeholder='123'><br>
@@ -65,7 +64,6 @@
 
 <div id="joinClasses" class="joinClasses">
     <div class="join-content">
-        <!-- <span class="close">&times;</span> -->
         <form action="joinClass.php" method="post">
             <label for="accessCode">Access Code</label><br>
             <input type="text" id="accessCode" name="accessCode" placeholder='12345'><br>
@@ -79,12 +77,11 @@
         <ul>
             <li><a href="ClassHomePage.php">Note Center</a></li>
             <?php
+                //Only showing the admin portal button if the user is an admin
                 if ($is_admin){
                     echo '<li class="hideWhenSmall"><a href="ContactForms.php">Admin Portal</a></li>';
                 }
-                // if ($is_teacher){
-                //     echo '<li class="hideWhenSmall"><a href="#" id="createClass">Create Class</a></li>';
-                // }
+                //Hiding buttons from admin that are not needed
                 if (!$is_admin){
             echo '<li class="hideWhenSmall"><a href="#" id="createClass">Create Class</a></li>';
             echo '<li class="hideWhenSmall"><a href="#" id="joinClass">Join Class</a></li>';
@@ -100,16 +97,16 @@
             <li><a href="ClassHomePage.php">Note Center</a></li>
             <?php
                 if ($is_admin){
-                    echo '<li><a href="adminUserList.php">Admin Portal</a></li>';
+                    echo '<li><a href="ContactForms.php">Admin Portal</a></li>';
                 }
-                // if ($is_teacher){
-                //     echo '<li><a href="#" id="createClass2">Create Class</a></li>';
-                // }
+                
+                if (!$is_admin){
+                    echo '<li><a href="#" id="createClass2">Create Class</a></li>';
+                    echo '<li><a href="#" id="joinClass2">Join Class</a></li>';
+                    echo '<li><a href="ContactPage.php">Contact Support</a></li>';
+                    echo '<li><a href="profile.php">Profile</a></li>';
+                }
             ?>
-            <li><a href="#" id="createClass2">Create Class</a></li>
-            <li><a href="#" id="joinClass2">Join Class</a></li>
-            <li><a href="ContactPage.php">Contact Support</a></li>
-            <li><a href="profile.php">Profile</a></li>
             <li><a href="logout.php">Logout</a></li>
             
         </ul>
@@ -117,6 +114,7 @@
     <div class="classPageStyle">
         <h1 class="classPageGreeting">My Courses</h1><br>
         <?php
+            //Checking if the user is a student
             $email = $_SESSION['email'];
             $studentCheck = "select * from Student where StudentUserName = :email";
             $stmtStudent = $conn->prepare($studentCheck);
@@ -124,12 +122,12 @@
             $stmtStudent->execute();
             $student = $stmtStudent->fetch(PDO::FETCH_ASSOC);
             $studentID = $student['StudentID'];
-
+            //Creating a query and echoing all the classes as a button that the student is in
             $query = "select Class.*, Teacher.FirstName, Teacher.LastName from Class join StudentClass on Class.ClassID = StudentClass.ClassID join Teacher on Class.TeacherID = Teacher.TeacherID where StudentClass.StudentID = :studentID";
             $stmtTeacher = $conn->prepare($query);
             $stmtTeacher->bindParam(':studentID', $studentID);
             $stmtTeacher->execute();
-
+            //Sends you to the class of the button that you click on
             if ($student){
             if ($stmtTeacher->rowCount() > 0) {
                 echo '<div class="grid-container">';
@@ -151,6 +149,7 @@
         ?>
 
         <?php
+            //Checking again if the user is a teacher, if so echo all of their classes
             $email = $_SESSION['email'];
             $teacherCheck = "select * from Teacher where TeacherUserName = :email";
             $stmtTeacher2 = $conn->prepare($teacherCheck);
@@ -183,9 +182,8 @@
                 }
             }
         ?>
-
-        <!-- Working on admin view and access to classes -->
         <?php
+        //If the user is an admin, echo every single class that is in the database
         if ($is_admin){
 
             $queryAdmin = "select * from Class";
@@ -211,7 +209,7 @@
         ?>
     </div>
 
-    
+    <!-- Button Stuff -->
     
     <script>
         var form = document.getElementById("classCreation");

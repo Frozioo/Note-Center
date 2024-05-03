@@ -2,6 +2,7 @@
     require "/home/group9/connections/connect.php";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //Information requried to create a new account and assigning them to variables
         $userType = $_POST["userType"];
         $id = $_POST["id"];
         $uploadnotes = true;
@@ -35,6 +36,7 @@
                     $empty = false;
                     $message = "User already exists";
                 } else {
+                    //Creating student account
                     if ($userType == "Student") {
                         $stmt = $conn->prepare("insert into Student (StudentID, StudentUserName, StudentPassword, CanUploadNotes, 
                         FirstName, LastName) values (:id, :email, :password, :uploadnotes, :firstname, :lastname)");
@@ -47,6 +49,7 @@
                         $stmt->execute();
                         header("Location: index.php");
                     } elseif ($userType == "Teacher") {
+                        //Creating teacher account
                         $stmt = $conn->prepare("insert into Teacher (TeacherID, TeacherUserName, TeacherPassword, LastName, FirstName) values (:id, :email, :password, :lastname, :firstname)");
                         $stmt->bindParam(':id', $id);
                         $stmt->bindParam(':email', $email);

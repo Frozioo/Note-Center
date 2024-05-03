@@ -2,10 +2,11 @@
     require '/home/group9/connections/connect.php';
 
     session_start();
+    //Checking if the user is logged in correclty
     if(!isset($_SESSION['email'])) {
         header('Location: index.php');
         exit;
-
+        //Checking what class we are currently in
     $stmt = $conn->prepare("select * from Class where ClassID = :classID");
     $stmt->bindParam(':classID', $classID);
     $stmt->execute();
@@ -54,6 +55,7 @@
 <?php
     if(isset($_POST['StudentID']) && isset($_POST['CanUploadNotes']))
     {
+        //Method for toggling a student's permission to upload notes
         $sID = $_POST['StudentID'];
         if ($_POST['CanUploadNotes'] == 1){
             $query2 = ("update Student set CanUploadNotes=0 where StudentID=?");
@@ -65,16 +67,17 @@
             $qr->execute([$sID]);
         }  
     } elseif (isset($_POST['StudentID'])) {
+        //Method for removing a student from a class
         $sID = $_POST['StudentID'];
         $queryFindUser = ("select StudentUserName from Student where StudentID=?");
         $qrFindUser = $conn->prepare($queryFindUser);
         $qrFindUser->execute([$sID]);
         $userName = $qrFindUser->fetch(PDO::FETCH_ASSOC);
-
+        //Removing all notes that the user has uploaded in the class
         $queryDelNotes = ("delete from Notes where StudentUserName=?");
         $qrDelNotes = $conn->prepare($queryDelNotes);
         $qrDelNotes->execute([$userName['StudentUserName']]);
-
+        //Removing the student from the class
         $query2 = ("delete from StudentClass where StudentID=?");
         $qr = $conn->prepare($query2);
         $qr->execute([$sID]);
@@ -85,7 +88,6 @@
 
 <table class = 'tableAlignments'>
     <?php        
-        //Need to input whatever class it is currently pulling from.
         $query = "select * from Student inner join StudentClass on Student.StudentID = StudentClass.StudentID where StudentClass.ClassID = ?";
         $qr = $conn->prepare($query);
         $qr->execute([$classID]);
@@ -103,17 +105,20 @@
 			echo "<td><input type=text name = 'StudentUserName' class = 'tableFonts' disabled value = '". $row['StudentUserName']."'></td>";
 		    echo "<td><input type=text name = 'StudentFNAME' class = 'tableFonts' disabled value = '". $row['FirstName']."'></td>";
 		    echo "<td><input type=text name = 'StudentLNAME' class = 'tableFonts' disabled value = '". $row['LastName']."'></td>";
+            //Showing what the 0/1 values actually mean for a student's uplaod permission
             if ($row['CanUploadNotes'] == 1){
                 echo "<td><input type=bool name = 'CanUploadNotes' class = 'tableFonts' disabled value = '". 'Can Upload'."'></td>";
             } else {
                 echo "<td><input type=bool name = 'CanUploadNotes' class = 'tableFonts' disabled value = '". 'Can NOT Upload'."'></td>";
             }
+            //Form for calling the upload permissions method
             echo "<td>";
             echo "<form action = 'teacherStudentList.php?classID=$classID' method = 'POST' onsubmit=\"return confirm('Update this students note permissions?');\">";
             echo "<input type = 'hidden' name = 'StudentID' value = '" . $row['StudentID'] . "'>";
             echo "<input type = 'hidden' name = 'CanUploadNotes' value = '" . $row['CanUploadNotes'] . "'>";
             echo "<input type=submit class = 'buttonFonts' value='Toggle Upload Permissions '>";
             echo "</form>";
+            //Form for calling the remove from class method
             echo "</td>";
             echo "<td>";
             echo "<form action = 'teacherStudentList.php?classID=$classID' method = 'POST' onsubmit=\"return confirm('Remove this student from this class?');\">";

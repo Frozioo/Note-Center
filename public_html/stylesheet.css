@@ -251,7 +251,7 @@ nav a:hover {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 10%;
+  width: 15%;
 }
 
 .joinClasses {
@@ -271,7 +271,7 @@ nav a:hover {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 10%;
+  width: 15%;
 }
 
 /* .close {
@@ -530,7 +530,7 @@ nav a:hover {
 }
 
 .delete-buttons {
-  width: 5%;
+  width: 10%;
   margin-left: 10px;
   margin-top: 50px;
   display: flex;

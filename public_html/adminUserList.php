@@ -1,3 +1,5 @@
+<!-- Currently a useless page - upgraded with contact forms page -->
+
 <?php
     require '/home/group9/connections/connect.php';
 

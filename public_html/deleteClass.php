@@ -12,7 +12,7 @@
     $tempVar = $conn->prepare($temp);
     $tempVar->execute([$classID]);
     $notes = $tempVar->fetchAll(PDO::FETCH_COLUMN);
-
+        //Delete all of the notes from the current class
      foreach ($notes as $notesID) {
         $temp2 = "select * from Notes where NotesID=?";
         $tempVar2 = $conn->prepare($temp2);
@@ -27,15 +27,15 @@
         $tempVar4 = $conn->prepare($temp4);
         $tempVar4->execute([$notesID]);
         }
-
+    //Delete every student from the class
     $temp3 = "delete from StudentClass where ClassID=?";
     $tempVar3 = $conn->prepare($temp3);
     $tempVar3->execute([$classID]);
-
+    //Delete all help requests from the current class
     $query2 = ("delete from ContactForms where ClassID=?");
     $qr2 = $conn->prepare($query2);
     $qr2->execute([$classID]);
-
+    //Delete the class
     $query3 = ("delete from Class where ClassID=?");
     $qr = $conn->prepare($query3);
     $qr->execute([$classID]);

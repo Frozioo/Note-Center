@@ -11,7 +11,7 @@
         header('Location: index.php');
         exit;
     }
-
+    //Checking if user is an admin
     $adminCheck = "select * from Admin where AdminUserName = :email";
     $stmt = $conn->prepare($adminCheck);
     $stmt->bindParam(':email', $_SESSION['email']);
@@ -20,17 +20,12 @@
     if ($stmt->rowCount() > 0) {
         $is_admin = true;
     }
-    
-    // $stmt = conn->query('SELECT * FROM Student WHERE StudentUserName = :email');
-    // $stmt->bind_param(':email', $_SESSION["email"]);
-    // $stmt->execute();
-    // $queryResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_SESSION["email"];
         $newPassword = $_POST["newPassword"];
         $newPassword2 = $_POST["newPassword2"];
-
+        //Password change information and updating the new password
         if($newPassword == $newPassword2){
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE Student SET StudentPassword = :newPassword WHERE StudentUserName = :email");
@@ -106,13 +101,12 @@
     <div>
         <h1>Profile Information</h1>
         <?php
-
+            //Display the users information whether they are a student or teacher
             $students = "select * from Student where StudentUserName = :email";
             $stmt = $conn->prepare($students);
             $stmt->bindParam(':email', $_SESSION['email']);
             $stmt->execute();
             $student = $stmt->fetch(PDO::FETCH_ASSOC);
-            //echo $student['FirstName'];
 
             $teachers = "select * from Teacher where TeacherUserName = :email";
             $stmt = $conn->prepare($teachers);

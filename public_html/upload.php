@@ -6,12 +6,13 @@
     error_reporting(E_ALL);
 
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
+        //Choosing the directory based on what class you are currently in
     $classID = $_POST["ClassID"];
     $target_dir = "/home/group9/public_html/Notes/" . $classID . "/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
+        //Try to upload the file if it doesn't already exist in the class
     try {
         if (file_exists($target_file)) {
             echo "Sorry, file already exists.";

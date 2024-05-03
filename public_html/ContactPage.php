@@ -16,6 +16,7 @@
     // Testing to see if it shows that correct user is logged in. Remove later.
     // echo "Logged in as: " . $_SESSION['email'];
 
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstName = htmlspecialchars($_POST['firstName']);
         $lastName = htmlspecialchars($_POST['lastName']);
@@ -28,6 +29,7 @@
 
         $stmt->execute([$firstName, $lastName, $email, $subject, $message, $classID]);
     }
+
 ?>
 
 

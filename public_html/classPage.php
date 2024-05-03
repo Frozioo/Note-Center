@@ -1,8 +1,3 @@
-<!-- 
-    TODO:
-    - Reformat the page to look better
- -->
-
 <?php
     session_start();
     require "/home/group9/connections/connect.php";
@@ -91,7 +86,11 @@
         
          
             <li class="hideWhenSmall"><a href="ContactPage.php">Contact Support</a></li>
-            <li class="hideWhenSmall"><a href="profile.php">Profile</a></li>
+            <?php
+                if ($teacher || $student) {
+                    echo '<li class="hideWhenSmall"><a href="profile.php">Profile</a></li>';
+                }
+            ?>
             <li class="hideWhenSmall"><a href="logout.php">Logout</a></li>
             <li class="menu-button" onclick=showSideBar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
         </ul>
@@ -99,15 +98,19 @@
             <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
             <li><a href="ClassHomePage.php">Note Center</a></li>
             <?php
-            if ($is_admin){
-            echo '<li><a href="ContactForms.php">Admin Portal</a></li>';
+            if ($admin){
+                echo '<li><a href="ContactForms.php">Admin Portal</a></li>';
             }
             if ($teacher){
                 echo '<li><a href="teacherStudentList.php?classID=' . $classID . '">Class Roster</a></li>';
             }
             ?>
             <li><a href="ContactPage.php">Contact Support</a></li>
-            <li><a href="profile.php">Profile</a></li>
+            <?php
+                if ($teacher || $student) {
+                    echo '<li><a href="profile.php">Profile</a></li>';
+                }
+            ?>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
@@ -116,28 +119,11 @@
   
     <p class = 'classHeader'><strong></strong><b> <?php echo $class["ClassName"]; ?></b></p>
     <p class = 'classHeader'><?php echo $class["ClassDescription"]; ?></p>
-    <p class = "classInfoOne"><?php if ($admin){ echo '<strong>Class ID:</strong> ' . $class["ClassID"];} ?></p>
+    <p class = "classInfoOne"><?php echo '<strong>Class ID:</strong> ' . $class["ClassID"]; ?></p>
     <p class = "classInfoTwo"><?php if ($teacher || $admin){echo '<strong>Teacher ID: </strong>' . $class["TeacherID"];} ?></p>
     <p class = "classInfoThree"><?php if ($teacher || $admin){echo '<strong>Access Code: </strong>' . $class["accessCode"];} ?></p>
 
     <?php
-        // session_start();
-        // require "/home/group9/connections/connect.php";
-
-        // $classID = $_GET["ClassID"];
-
-        // $stmt = $conn->prepare("select * from Class where ClassID = :classID");
-        // $stmt->bindParam(':classID', $classID);
-        // $stmt->execute();
-        // $class = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // $studentID = $_SESSION['email'];
-        // $stmt = $conn->prepare("select * from Notes where StudentUserName = :studentID and ClassID = :classID");
-        // $stmt->bindParam(':studentID', $studentID);
-        // $stmt->bindParam(':classID', $classID);
-        // $stmt->execute();
-        // $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         session_start();
         require "/home/group9/connections/connect.php";
     
@@ -210,6 +196,15 @@ echo "</form>";
             button.textContent = 'Show Notes';
         }
     });
+
+    function showSideBar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'flex';
+        }
+        function hideSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'none';
+        }
 </script>
     <div class="notesDisplay">
         <div id="notesDisplay" style="display: none;">
